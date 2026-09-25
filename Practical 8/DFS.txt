@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void DFS(int graph[][100], bool visited[], int vertex, int n) {
+    cout << vertex << " ";
+    visited[vertex] = true;
+
+    for (int i = 0; i < n; i++) {
+        if (graph[vertex][i] == 1 && !visited[i]) {
+            DFS(graph, visited, i, n);
+        }
+    }
+}
+
+int main() {
+    int n, e;
+
+    cout << "Enter number of vertices: ";
+    cin >> n;
+
+    cout << "Enter number of edges: ";
+    cin >> e;
+
+    int graph[100][100] = {};
+
+    cout << "Enter edges:\n";
+    for (int i = 0; i < e; i++) {
+        int u, v;
+        cin >> u >> v;
+        graph[u][v] = 1;
+        graph[v][u] = 1;
+    }
+
+    int start;
+    cout << "Enter starting vertex: ";
+    cin >> start;
+
+    bool visited[100] = {false};
+
+    cout << "DFS Traversal: ";
+    DFS(graph, visited, start, n);
+
+    return 0;
+}
